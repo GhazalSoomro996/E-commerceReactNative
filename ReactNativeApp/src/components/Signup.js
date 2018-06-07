@@ -10,13 +10,13 @@ export default class Signup extends React.Component {
     }
 
   handleSubmit = () => {
-    alert("You are signed up!");
+    alert("WELCOME!");
   }
 
   render() {
     return (
       <Container>
-      <Header style={{paddingTop: 45, paddingBottom: 20}}>
+      <Header style={styles.header1}>
         <Left>
           <Button transparent
            onPress={() => this.props.navigation.navigate('Home')}>
@@ -89,5 +89,11 @@ const styles = StyleSheet.create({
     
     btntext:{
     color: '#fff',
-    fontWeight: 'bold'}
+    fontWeight: 'bold'},
+
+    header1:{
+      paddingTop: 45, 
+      paddingBottom: 20, 
+      backgroundColor: 'gray'
+    }
 });

@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import {View,FlatList, StyleSheet,Image, ScrollView, BackHandler} from 'react-native';
+import {View,FlatList, StyleSheet,Image, ScrollView, Dimensions, BackHandler} from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import {Card ,} from 'react-native-elements';
-
-
 
 export default class Smartphones extends Component {
 
   constructor(props){
       super(props);
       this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  }
 
-  state = {
-    data: []
-  };
+      this.state = {
+        cart:[],
+        Mobforshop1: [],
+      }
+  }
 
   handleBackButtonClick() {
       this.props.navigation.navigate('Home');
@@ -26,17 +25,19 @@ export default class Smartphones extends Component {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
  
-
   fetchData = async () => {
-    const response = await fetch("https://randomuser.me/api?results=10");
+    const response = await fetch("https://i-ecom.herokuapp.com/getdata");
+    console.log(response);
     const json = await response.json();
-    this.setState({ data: json.results });
+
+    this.setState({ Mobforshop1: json[0].s_phone_data});
+
   };
 
   render() {
     return (
       <Container>
-        <Header style={{paddingTop: 45, paddingBottom: 20}}>
+        <Header style={styles.header}>
           <Left>
             <Button transparent
             onPress={() => this.props.navigation.navigate('Home')}>
@@ -51,26 +52,31 @@ export default class Smartphones extends Component {
 
         <Content>
             <View style={styles.container}>
-            <FlatList
-            data={this.state.data}
-            keyExtractor={(x, i) => i}
-            renderItem={({ item }) =>
+              <FlatList
+                  data={this.state.Mobforshop1}
+                  keyExtractor={(x, i) => i}
+                  renderItem={({ item }) =>
                 <Card
-                    title='HELLO WORLD'
+                  containerStyle={{width: Dimensions.get('window').width - 30}}
+                    title= "Hello World" 
                     image={{uri:'https://cdn-images-1.medium.com/max/2000/1*oc4pOoEeR_QMrCA6LkF5Kw.jpeg'}}>
-                    <Text style={{marginBottom: 10}}>
-                        The idea with React Native Elements is more about component structure than actual design.
+                    <Text style={styles.text}>
+                      {item.name}
+                    </Text>
+                      <Text style={styles.text}>
+                      {item.price}
+                    </Text>
+                      <Text style={styles.text}>
+                      {item.description}
                     </Text>
                     
                     <Button  block info
-                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, justifyContent: 'center'}}
-                        ><Text> Add to Cart </Text>
-                    
-                        </Button>
+                      onPress = {()=> {this.props.navigation.navigate('Cart')}}>
+                      <Text> Add to Cart </Text>
+                    </Button>
                 </Card>
-    
-                }
-            />
+                  }   
+                />
             </View>
             </Content>
       </Container>
@@ -86,5 +92,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
+  },
+  text:{
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  header:{
+    paddingTop: 45, 
+    paddingBottom: 20, 
+    backgroundColor: 'gray'
   }
 });

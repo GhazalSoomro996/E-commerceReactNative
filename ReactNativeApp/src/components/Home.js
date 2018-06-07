@@ -28,30 +28,47 @@ export default class Home extends React.Component {
             require('../images/slide3.jpg'),
             require('../images/slide4.jpg'),
             require('../images/slide5.jpg'),
-        ]
+        ],
+
+        cart:[],
+
+        Mobforshop1: [],
+
+        gforshop2: [],
+        
+        eforshop3: [],
+
+        grforshop4: [],
     }
   }
 
-  state = {
-    data: []
-  };
+
 
   componentWillMount() {
     this.fetchData();
   }
  
-  fetchData = async () => {
-    const response = await fetch("https://randomuser.me/api?results=10");
+   fetchData = async () => {
+    const response = await fetch("https://i-ecom.herokuapp.com/getdata");
+    console.log(response);
     const json = await response.json();
-    this.setState({ data: json.results });
-  };
 
+    this.setState({ Mobforshop1: json[0].s_phone_data});
+
+    this.setState({ gforshop2: json[1].groceries__data});
+    
+    this.setState({ eforshop3: json[2].electronics__data});
+
+    this.setState({ grforshop4: json[3].garments__data});
+
+     };
+     
   render() {
     return (
         
         <Container>
             <View style={{height: statusBarHeight, backgroundColor: '#fff'}}></View>
-            <Header style={{paddingTop: 45, paddingBottom: 20}}>
+            <Header style={styles.header}>
                 <Left>
                     <Button transparent
                     onPress= {() => this.props.navigation.openDrawer()}
@@ -74,22 +91,17 @@ export default class Home extends React.Component {
                     onPress={() => this.props.navigation.navigate('Login')}>
                         <Text>Login</Text>
                     </Button>
-                    <Button transparent
-                    onPress={() => this.props.navigation.navigate('Signup')}>
-                        <Text>Signup</Text>
-                    </Button>
                 </Right>
-
             </Header>
 
             <Content>
                 <View style={{flex:1, backgroundColor: "#F5FCFF"}}>
                     <Swiper
                         autoplay
-                        height={240}
-                    >
+                        height={240}>
                     {
-                        this.state.imagesSlider.map((item, i) => <Slider 
+                        this.state.imagesSlider.map((item, i) => 
+                        <Slider 
                             uri={item}
                             key={i}
                         />)
@@ -99,26 +111,109 @@ export default class Home extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                        <FlatList
-                        data={this.state.data}
+                    <FlatList
+                        data={this.state.Mobforshop1}
                         keyExtractor={(x, i) => i}
                         renderItem={({ item }) =>
-                            <Card
-                                title='HELLO WORLD'
-                                image={{uri:'https://cdn-images-1.medium.com/max/2000/1*oc4pOoEeR_QMrCA6LkF5Kw.jpeg'}}>
-                                <Text style={{marginBottom: 10}}>
-                                    The idea with React Native Elements is more about component structure than actual design.
-                                </Text>
-                                
-                                <Button  block info
-                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, justifyContent: 'center'}}
-                                 ><Text> Add to Cart </Text>
-                                
-                                 </Button>
-                            </Card>
-                
-                            }
-                        />
+                      <Card
+                        containerStyle={{width: Dimensions.get('window').width - 30}}
+                          title= "Hello World" 
+                          image={{uri:'https://cdn-images-1.medium.com/max/2000/1*oc4pOoEeR_QMrCA6LkF5Kw.jpeg'}}>
+                          <Text style={styles.text}>
+                            {item.name}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.price}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.description}
+                          </Text>
+                          
+                          <Button  block info
+                           onPress = {()=> {this.props.navigation.navigate('Cart')}}>
+                           <Text> Add to Cart </Text>
+                          </Button>
+                      </Card>
+                        }   
+                    />
+
+                    <FlatList
+                        data={this.state.gforshop2}
+                        keyExtractor={(x, i) => i}
+                        renderItem={({ item }) =>
+                      <Card
+                        containerStyle={{width: Dimensions.get('window').width - 30}}
+                          title= "Hello World" 
+                          image={{uri:'https://cdn-images-1.medium.com/max/2000/1*oc4pOoEeR_QMrCA6LkF5Kw.jpeg'}}>
+                          <Text style={styles.text}>
+                            {item.name}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.price}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.description}
+                          </Text>
+                          
+                          <Button  block info
+                           onPress = {()=> {this.props.navigation.navigate('Cart')}}>
+                           <Text> Add to Cart </Text>
+                          </Button>
+                      </Card>
+                        }   
+                    />
+
+                    <FlatList
+                        data={this.state.eforshop3}
+                        keyExtractor={(x, i) => i}
+                        renderItem={({ item }) =>
+                      <Card
+                        containerStyle={{width: Dimensions.get('window').width - 30}}
+                          title= "Hello World" 
+                          image={{uri:'https://cdn-images-1.medium.com/max/2000/1*oc4pOoEeR_QMrCA6LkF5Kw.jpeg'}}>
+                          <Text style={styles.text}>
+                            {item.name}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.price}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.description}
+                          </Text>
+                          
+                          <Button  block info
+                           onPress = {()=> {this.props.navigation.navigate('Cart')}}>
+                           <Text> Add to Cart </Text>
+                          </Button>
+                      </Card>
+                        }   
+                    />
+
+                    <FlatList
+                        data={this.state.grforshop4}
+                        keyExtractor={(x, i) => i}
+                        renderItem={({ item }) =>
+                      <Card
+                        containerStyle={{width: Dimensions.get('window').width - 30}}
+                          title= "Hello World" 
+                          image={{uri:'https://cdn-images-1.medium.com/max/2000/1*oc4pOoEeR_QMrCA6LkF5Kw.jpeg'}}>
+                          <Text style={styles.text}>
+                            {item.name}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.price}
+                          </Text>
+                            <Text style={styles.text}>
+                            {item.description}
+                          </Text>
+                          
+                          <Button  block info
+                           onPress = {()=> {this.props.navigation.navigate('Cart')}}>
+                           <Text> Add to Cart </Text>
+                          </Button>
+                      </Card>
+                        }   
+                    />
                 </View>
             </Content>
         </Container>
@@ -143,5 +238,15 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         width
-    }
+    },
+    text:{
+        textAlign: 'center',
+        marginBottom: 10
+      },
+      header:{
+        paddingTop: 45, 
+        paddingBottom: 20, 
+        backgroundColor: 'gray'
+      }
+
 });

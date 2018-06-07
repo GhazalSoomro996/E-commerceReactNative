@@ -7,6 +7,8 @@ import Signup from './src/components/Signup';
 import Home from './src/components/Home';
 import Smartphones from './src/components/Smartphones';
 import Groceries from './src/components/Groceries';
+import Garments from './src/components/Garments';
+import Electronics from './src/components/Electronics';
 import Cart from './src/components/Cart';
 
 
