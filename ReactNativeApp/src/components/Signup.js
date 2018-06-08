@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 
     header1:{
       paddingTop: 45, 
-      paddingBottom: 20, 
+      paddingBottom: 25, 
       backgroundColor: 'gray'
     }
 });

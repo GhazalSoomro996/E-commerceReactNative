@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Font, AppLoading } from "expo";
 import { createStackNavigator, createDrawerNavigator} from 'react-navigation';
 import Login from './src/components/Login';
@@ -58,12 +57,12 @@ const StackApp= createStackNavigator({
 
 export default class App extends React.Component {
 
-  state = {
-    loading: true,
-  };
-
+  
   constructor(props){
     super(props);
+    this.state = {
+        loading: true,
+      };
   }
 
   async componentWillMount() {
@@ -81,24 +80,9 @@ export default class App extends React.Component {
         Expo.AppLoading
         );
     }
-    let a=0;
-    if(a==0){
+
     return (
-      
-    
     <StackApp/>
-    );}
-    else{
-      return(<Home/>);
-    }
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

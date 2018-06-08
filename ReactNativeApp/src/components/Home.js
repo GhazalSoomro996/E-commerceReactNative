@@ -1,6 +1,6 @@
 import React from 'react';
-import {View,FlatList, StyleSheet,Image, ScrollView, Dimensions, BackHandler} from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import {View,FlatList, StyleSheet,Image, Dimensions, BackHandler} from 'react-native';
+import { Container, Header, Title, Content, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import {Card ,} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import Constants from 'expo';
@@ -50,7 +50,7 @@ export default class Home extends React.Component {
  
    fetchData = async () => {
     const response = await fetch("https://i-ecom.herokuapp.com/getdata");
-    console.log(response);
+
     const json = await response.json();
 
     this.setState({ Mobforshop1: json[0].s_phone_data});
@@ -78,7 +78,7 @@ export default class Home extends React.Component {
                 </Left>
 
                 <Body>
-                    <Title>AAA</Title>
+                    <Title>BTS</Title>
                 </Body>
 
                 <Right>                   
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
       },
       header:{
         paddingTop: 45, 
-        paddingBottom: 20, 
+        paddingBottom: 25, 
         backgroundColor: 'gray'
       }
 
